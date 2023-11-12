@@ -1,0 +1,25 @@
+from termcolor import *
+
+print("\n                       =========================== ")
+print("                      |                           |")
+print("                      | Bem-vindo ao Insper Termo |")
+print("                      |                           |")
+print("                       ==== Design de Software === ")
+print("\n                            Comandos: desisto")
+print("\n    Regras:")
+
+vermelho = colored("6","red")
+print("\n    - Você tem " + vermelho + " tentativas para acertar uma palavra aleatória de 5 letras.")
+print("    - A cada tentativa, a palavra testada terá suas letras coloridas conforme:")
+
+azul = colored("Azul","blue")
+posicao_correta = colored(" : a letra está na posição correta;","white")
+print("    - " + azul + posicao_correta)
+amarelo = colored("Amarelo","yellow")
+posicao_errada = colored(" : a palavra tem a letra, mas está na posição errada;","white")
+print("    - " + amarelo + posicao_errada)
+cinza = colored("Cinza","dark_grey")
+inexistente = colored(" : a palavra não tem a letra.","white")
+print("    - " + cinza + inexistente)
+print("    - Os acentos são ignorados;")
+print("    - As palavras podem possuir letras repetidas.")
