@@ -67,6 +67,3 @@ def senha_cores(sorteada,especulada):
 
     resposta = "".join(devolutiva)
     return resposta
-
-
-

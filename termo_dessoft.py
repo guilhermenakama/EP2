@@ -1,53 +1,111 @@
 
-import random
+from funcoes import *
+from listas_palavras import base_palavras
+import introducao
 
-def filtra(palavras,num_letras):
-    lista = []
-    caract_especiais = ["?","!","@",".",",","~","^","´","`","-","_"]
+#Printar a tabela inicial
+print(introducao)
 
-    for palavra in palavras:
+tentativas = 6
+num_letras = 5
 
-        if len(palavra) == num_letras:
-            palavra = palavra.lower()
+#Iniciando novo jogo
+print("\n    Sorteando uma palavra...")
 
-            for caracter in caract_especiais:
-                texto_sem_especiais = palavra.replace(caracter,"")
-            
-            if palavra not in lista:
-                lista.append(palavra)
+#Cria lista de palavras com 5 letras
+lista_palavras = filtra(base_palavras,num_letras)
 
-    return lista
+#Cria dicionario
+dicionario = inicializa(lista_palavras)
 
+#Escolhe palavra sorteada aleatoriamente
+sorteada = dicionario['sorteada']
 
-def inicializa(lista_palavras):
+print("    Já tenho uma palavra! Tente adivinhá-la!")
+print("\n    Você tem {0} tentaviva(s)".format(tentativas))
 
-    dic = {}
+#Roda o jogo em looping
+while True:
+
+    especulada = input("    Qual seu palpite? ")
+
+    #Roda o comando "desisto"
+    if especulada.lower() == "desisto":
+
+        jogo_novo = input("Jogar novamente? [s|n] ")
+
+        #Sair do jogo
+        if jogo_novo.lower() == "n":
+            break
+        #Iniciar novo jogo
+        elif jogo_novo.lower() == "s":
+            tentativas = 6
+            num_letras = 5
+            print("\n    Sorteando uma palavra...")
+            lista_palavras = filtra(base_palavras,num_letras)     #Cria lista de palavras com 5 letras
+            dicionario = inicializa(lista_palavras)               #Cria dicionario
+            sorteada = dicionario['sorteada']                     #Escolhe palavra sorteada aleatoriamente
+            print("    Já tenho uma palavra! Tente adivinhá-la!")
     
-    sorteada = random.choice(lista_palavras)
-    n = len(sorteada)
+    #Quando a palavra não possui 5 letras
+    if len(especulada) != num_letras:
+        print("\n    Apenas palavras de {0} letras".format(num_letras))
+        continue
+    #Quando a palavra não está na lista de palavras
+    elif especulada not in base_palavras:
+        print("\n    Palavra desconhecida")
+        continue
 
-    dic['sorteada'] = sorteada
-    dic['n'] = n
-    dic['especuladas'] = []
-    dic['tentativas'] = n + 1
+    print("\n    INSPER :: TERMO")
 
-    return dic
+    #Devolve a palavra especulada com a senha de cores
+    resposta = senha_cores(sorteada,especulada)
+    # Devolve a palavra especulada colorida e separada por barras
 
-
-def inidica_posicao(sorteada,especulada):
-
-    resposta = []
-
-    if len(sorteada) != len(especulada):
-        return([])
+    print("    --- --- --- --- --- ")
+    print("    " + resposta)
+    print("    --- --- --- --- --- ")
     
-    for i in range(len(sorteada)):
-        
-        if especulada[i] not in sorteada:
-            resposta.append(2)
-        elif especulada[i] == sorteada[i]:
-            resposta.append(0)
-        else:
-            resposta.append(1)
 
-    return resposta
+    #Quando acerta a resposta       
+    if resposta == sorteada:
+        print("\n    >>> Parabéns! Você acertou a palavra!")
+        jogo_novo = input("Jogar novamente? [s|n] ")
+
+        #Sair do jogo
+        if jogo_novo == "n":
+            break
+        #Iniciar novo jogo
+        elif jogo_novo == "s":
+            tentativas = 6
+            num_letras = 5
+            print("\n    Sorteando uma palavra...")
+            lista_palavras = filtra(base_palavras,num_letras)     #Cria lista de palavras com 5 letras
+            dicionario = inicializa(lista_palavras)               #Cria dicionario
+            sorteada = dicionario['sorteada']                     #Escolhe palavra sorteada aleatoriamente
+            print("    Já tenho uma palavra! Tente adivinhá-la!")
+    
+    #Reduz uma tentativa
+    tentativas -= 1
+
+    #Caso o número de tentativas chegue a zero
+    if tentativas == 0:
+        print("\n    >>> Você perdeu, a palavra era: {0}".format(sorteada))
+        jogo_novo = input("Jogar novamente? [s|n] ")
+
+        #Sair do jogo
+        if jogo_novo == "n":
+            break
+        #Iniciar novo jogo
+        elif jogo_novo == "s":
+            tentativas = 6
+            num_letras = 5
+            print("\n    Sorteando uma palavra...")
+            lista_palavras = filtra(base_palavras,num_letras)     #Cria lista de palavras com 5 letras
+            dicionario = inicializa(lista_palavras)               #Cria dicionario
+            sorteada = dicionario['sorteada']                     #Escolhe palavra sorteada aleatoriamente
+            print("    Já tenho uma palavra! Tente adivinhá-la!")
+
+    print("\n    Você tem {0} tentaviva(s)".format(tentativas))
+
+    
