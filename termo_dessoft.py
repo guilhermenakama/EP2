@@ -6,8 +6,8 @@ import introducao
 #Printar a tabela inicial
 print(introducao)
 
-tentativas = 6
-num_letras = 5
+num_letras = int(input("\n    Quantas letras na palavra? "))
+tentativas = num_letras + 1
 
 #Iniciando novo jogo
 print("\n    Sorteando uma palavra...")
@@ -39,8 +39,8 @@ while True:
             break
         #Iniciar novo jogo
         elif jogo_novo.lower() == "s":
-            tentativas = 6
-            num_letras = 5
+            num_letras = int(input("\n    Quantas letras na palavra? "))
+            tentativas = num_letras + 1
             print("\n    Sorteando uma palavra...")
             lista_palavras = filtra(base_palavras,num_letras)     #Cria lista de palavras com 5 letras
             dicionario = inicializa(lista_palavras)               #Cria dicionario
@@ -73,12 +73,12 @@ while True:
         jogo_novo = input("Jogar novamente? [s|n] ")
 
         #Sair do jogo
-        if jogo_novo == "n":
+        if jogo_novo.lower() == "n":
             break
         #Iniciar novo jogo
-        elif jogo_novo == "s":
-            tentativas = 6
-            num_letras = 5
+        elif jogo_novo.lower() == "s":
+            num_letras = int(input("\n    Quantas letras na palavra? "))
+            tentativas = num_letras + 1
             print("\n    Sorteando uma palavra...")
             lista_palavras = filtra(base_palavras,num_letras)     #Cria lista de palavras com 5 letras
             dicionario = inicializa(lista_palavras)               #Cria dicionario
@@ -94,12 +94,12 @@ while True:
         jogo_novo = input("Jogar novamente? [s|n] ")
 
         #Sair do jogo
-        if jogo_novo == "n":
+        if jogo_novo.lower() == "n":
             break
         #Iniciar novo jogo
-        elif jogo_novo == "s":
-            tentativas = 6
-            num_letras = 5
+        elif jogo_novo.lower() == "s":
+            num_letras = int(input("\n    Quantas letras na palavra? "))
+            tentativas = num_letras + 1
             print("\n    Sorteando uma palavra...")
             lista_palavras = filtra(base_palavras,num_letras)     #Cria lista de palavras com 5 letras
             dicionario = inicializa(lista_palavras)               #Cria dicionario
